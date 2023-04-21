@@ -31,7 +31,7 @@
                     </tr>
                     @foreach($lists as $list)
                     <tr>
-                        <td><a href="{{ url('view-notification/'.$list->id) }}">{{$list->name}}</a></td>
+                        <td><a class="text-success" href="{{ url('view-notification/'.$list->id) }}">{{$list->name}}</a></td>
                         <td>{{$list->email}}</td>
                         <td>{{$list->phone_number}}</td>
                         <td>{{$list->address}}</td>

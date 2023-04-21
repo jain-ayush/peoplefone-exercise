@@ -53,13 +53,18 @@ class NotificationController extends Controller
 
     public function list()
     {
-        $notifications = Notification::with('user')->get();
+        // dd(\Carbon\Carbon::now());
+        $notifications = Notification::where('expiry_date','>', \Carbon\Carbon::now())->with('user')->get();
         return view('list_notifications',['notifications_list' => $notifications]);
     }
 
     public function view($id)
     {
-        $userNotifications = User::where('id',$id)->with(['notifications','unread_notifications'])->first();
+        $userNotifications = User::where('id',$id)->with(['notifications'=> function($query){
+            $query->where('expiry_date','>', \Carbon\Carbon::now());
+        },'unread_notifications'=> function($query){
+            $query->where('expiry_date','>', \Carbon\Carbon::now());
+        }])->first();
         return view('view-notification',['user_notifications' => $userNotifications]);
     }
 
