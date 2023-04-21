@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Twilio\Exceptions\TwilioException;
+use Twilio\Rest\Client;
 
 class UserController extends Controller
 {
@@ -26,20 +28,45 @@ class UserController extends Controller
             'email'   => 'required|email',
             'phone_number'   => 'required|numeric|min:10',
         ]);
-        print_r($request->input());exit;
+        $verifyNumber = $this->verifyNumber($request->phone_number);
+        if($verifyNumber){
+            $user = User::find($id);
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone_number = $request->phone_number;
+            $user->notification_switch = $request->notification_switch ?? '0';
+            $user->update();
+            return redirect('dashboard')->with('status','User Updated Successfully');
+        }
+        else{
+            return redirect('dashboard')->with('status','Cannot Updated User');
+        }
 
-        $user = User::find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone_number = $request->phone_number;
-        $user->notification_switch = $request->notification_switch ?? '0';
-        $user->update();
-        return redirect('dashboard')->with('status','User Updated Successfully');
-        // return view('edit-user', ['user' => $user]);
     }
 
     public function verifyNumber($number)
     {
-        dd($number);
+        $sid = env('TWILLIO_SID');
+        $token = env('TWILLIO_TOKEN');
+        $number = '+91'.$number;
+        $serviceId = 'VA11c5b9e274adb565f7ee8a5d17f84801';
+        $twilio = new Client($sid, $token);
+        try{
+            $verification = $twilio->verify->v2->services("VA11c5b9e274adb565f7ee8a5d17f84801")
+                                   ->verifications
+                                   ->create("$number", "sms");
+
+            if($verification->sid)
+            {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        catch(TwilioException $e){
+            echo $e; exit;
+        }
+        
     }
 }
