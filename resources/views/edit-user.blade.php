@@ -34,18 +34,21 @@
                             <label for="">Email*</label>
                             <input type="text" name="email" value="{{$user->email}}" class="form-control">
                         </div>
-                        <div class="form-group mb-3">
+                        <div class="form-group mb-3 col-12" style="display:flex">
                             <div class="form-group mb-3 col-8">
                                 <label for="">Phone Number*</label>
                                 <input type="text"  pattern="[0-9]{10}" name="phone_number" id="phone_number" value="{{$user->phone_number}}" class="form-control">
                                 <p class="text-danger"><small>Length should be of 10 digit</small></p>
                             </div>
-                            <div class="form-group col-4">
-                                <button type="button" class="btn btn-primary" onclick="sendOtp()">Send OTP</button>
-                                <input type="text" name="otp" value="" class="form-control">
-
+                            <div class="form-group col-4 p-4">
+                                <button type="button" class="btn btn-primary" onclick="sendOtp()">Send OTP</button> 
                             </div>
+                           
                         </div>
+                        <div class="form-group mb-3 col-4" id="otp-div" style="display: none;">
+                            <label for="">Enter OTP*</label>
+                            <input type="text" name="otp"  value="" class="form-control" >
+                            </div>
                         <div class="form-group mb-3">
                             <!-- <label for="">Notification Switch</label>
                             <input type="text" name="notification_switch" value="{{$user->notification_switch}}" class="form-control"> -->
@@ -71,7 +74,12 @@
     function sendOtp()
     {
         var phone_number = document.getElementById("phone_number").value;
-        $.ajax({
+        var regex = '^[0-9]{10}$';
+        if(!phone_number.match(regex))
+        {
+            alert('Enter Valid phone number')
+        } else{
+            $.ajax({
                 method:'POST',
                 url:"{{ route('sendOtp') }}",
                 data:{
@@ -80,10 +88,12 @@
                 },
                 success:function(data){
                     if(data){
-                        alert('success');
+                        alert('OTP Sent Successfully');
+                        $('#otp-div').show();
                     }
                 }
             });
+        }
         
     }
 
