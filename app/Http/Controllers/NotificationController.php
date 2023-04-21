@@ -18,13 +18,14 @@ class NotificationController extends Controller
     {
         $this->validate($request, [
             'type'   => 'required',
+            'description'   => 'required',
             'expiry_date'   => 'required',
             'destination'   => 'required',
         ]);
-    
         try {
             if($request->destination == 'select_all') {
-                $userList = User::pluck('id')->where('notification_switch',1)->toArray();
+
+                $userList = User::where('notification_switch',1)->pluck('id')->toArray();
                 foreach($userList as $key=>$value)
                 {
                     $notification = new Notification();
@@ -32,6 +33,7 @@ class NotificationController extends Controller
                     $notification->description = $request->description;
                     $notification->expiry_date = $request->expiry_date;
                     $notification->destination = $value;
+                    $notification->status = 0;
                     $notification->save();
                 }
             } else {
@@ -40,6 +42,7 @@ class NotificationController extends Controller
                 $notification->description = $request->description;
                 $notification->expiry_date = $request->expiry_date;
                 $notification->destination = $request->destination;
+                $notification->status = 0;
                 $notification->save();
             }
         } catch (\Throwable $th) {

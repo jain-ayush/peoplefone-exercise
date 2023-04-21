@@ -30,7 +30,8 @@
                         <th>Type</th>
                         <th>Description</th>
                         <th>Expiry Date</th>
-                        <th>Destination</th>
+                        <th>Destination User</th>
+                        <th>Status</th>
                     </tr>
                     @foreach($notifications_list as $list)
                     <tr>
@@ -38,6 +39,7 @@
                         <td>{{$list->description}}</td>
                         <td>{{$list->expiry_date}}</td>
                         <td>{{$list->user->name}}</td>
+                        <td>{{$list->status == 1 ? 'Read' : 'Unread'}}</td>
                         
                     </tr>
                     @endforeach

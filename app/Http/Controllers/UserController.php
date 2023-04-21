@@ -7,20 +7,27 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    function index()
+    public function index()
     {
         $userList = User::with('notifications')->get();
         return view('dashboard',['lists' => $userList]);
     }
 
-    function edit($id)
+    public function edit($id)
     {
         $user = User::find($id);
         return view('edit-user', ['user' => $user]);
     }
 
-    function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name'   => 'required',
+            'email'   => 'required|email',
+            'phone_number'   => 'required|numeric|min:10',
+        ]);
+        print_r($request->input());exit;
+
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
@@ -29,5 +36,10 @@ class UserController extends Controller
         $user->update();
         return redirect('dashboard')->with('status','User Updated Successfully');
         // return view('edit-user', ['user' => $user]);
+    }
+
+    public function verifyNumber($number)
+    {
+        dd($number);
     }
 }

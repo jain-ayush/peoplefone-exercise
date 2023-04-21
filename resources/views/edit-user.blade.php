@@ -14,6 +14,11 @@
                 </div>
                 <div class="card mx-auto" style="width: 50%;">
                 <div class="card-body">
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div class="text-danger">{{$error}}</div>
+                        @endforeach
+                    @endif
                     @if (session('status'))
                         <h6 class="alert alert-success">{{ session('status') }}</h6>
                     @endif
@@ -22,16 +27,17 @@
                         @method('PUT')
 
                         <div class="form-group mb-3">
-                            <label for="">Name</label>
+                            <label for="">Name*</label>
                             <input type="text" name="name" value="{{$user->name}}" class="form-control">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="">Email</label>
+                            <label for="">Email*</label>
                             <input type="text" name="email" value="{{$user->email}}" class="form-control">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="">Phone Number</label>
-                            <input type="text" name="phone_number" value="{{$user->phone_number}}" class="form-control">
+                            <label for="">Phone Number*</label>
+                            <input type="text"  pattern="[0-9]{10}" name="phone_number" value="{{$user->phone_number}}" class="form-control">
+                            <p class="text-danger"><small>Length should be of 10 digit</small></p>
                         </div>
                         <div class="form-group mb-3">
                             <!-- <label for="">Notification Switch</label>

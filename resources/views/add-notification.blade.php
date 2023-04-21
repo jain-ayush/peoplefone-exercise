@@ -50,7 +50,7 @@
                                 @foreach($user_lists as $list)
                                 <option value="{{$list->id}}">{{$list->name}}</option>
                                 @endforeach
-                                <option value="select_all">Select All Users</option>
+                                <option value="select_all">All Users</option>
 
                             </select>
                         </div>
