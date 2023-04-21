@@ -55,7 +55,7 @@ class UserController extends Controller
             $verification = $twilio->verify->v2->services("VA11c5b9e274adb565f7ee8a5d17f84801")
                                    ->verifications
                                    ->create("$number", "sms");
-
+            dd($verification->sid);
             if($verification->sid)
             {
                 return true;

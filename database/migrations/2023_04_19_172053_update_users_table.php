@@ -14,9 +14,9 @@ class UpdateUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('phone_number')->after('email')->nullable();
+            $table->string('phone_number')->after('email')->nullable();
             $table->string('address')->after('phone_number')->nullable();
-            $table->integer('notification_switch')->after('address');
+            $table->integer('notification_switch')->after('address')->default(1);
         });
     }
 
