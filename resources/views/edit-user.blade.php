@@ -35,9 +35,16 @@
                             <input type="text" name="email" value="{{$user->email}}" class="form-control">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="">Phone Number*</label>
-                            <input type="text"  pattern="[0-9]{10}" name="phone_number" value="{{$user->phone_number}}" class="form-control">
-                            <p class="text-danger"><small>Length should be of 10 digit</small></p>
+                            <div class="form-group mb-3 col-8">
+                                <label for="">Phone Number*</label>
+                                <input type="text"  pattern="[0-9]{10}" name="phone_number" id="phone_number" value="{{$user->phone_number}}" class="form-control">
+                                <p class="text-danger"><small>Length should be of 10 digit</small></p>
+                            </div>
+                            <div class="form-group col-4">
+                                <button type="button" class="btn btn-primary" onclick="sendOtp()">Send OTP</button>
+                                <input type="text" name="otp" value="" class="form-control">
+
+                            </div>
                         </div>
                         <div class="form-group mb-3">
                             <!-- <label for="">Notification Switch</label>
@@ -60,3 +67,24 @@
         </div>
     </div>
 </x-app-layout>
+<script>
+    function sendOtp()
+    {
+        var phone_number = document.getElementById("phone_number").value;
+        $.ajax({
+                method:'POST',
+                url:"{{ route('sendOtp') }}",
+                data:{
+                    "_token": "{{ csrf_token() }}",
+                    phone_number:phone_number
+                },
+                success:function(data){
+                    if(data){
+                        alert('success');
+                    }
+                }
+            });
+        
+    }
+
+</script>

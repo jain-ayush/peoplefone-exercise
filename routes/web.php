@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('list-notifications', [NotificationController::class, 'list'])->name('listNotifications');
     Route::get('view-notification/{id}', [NotificationController::class, 'view'])->name('viewNotifications');
     Route::post('change-status', [NotificationController::class, 'changeStatus'])->name('changeStatus');
+    Route::post('send-otp', [UserController::class, 'sendOtp'])->name('sendOtp');
 
 });
 

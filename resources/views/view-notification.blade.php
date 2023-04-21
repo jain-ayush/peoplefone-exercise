@@ -4,7 +4,7 @@
   
         <div>
             <a class="y" data-bs-toggle="collapse" href="#collapseExample" role="button"      aria-expanded="false" aria-controls="collapseExample">
-                <span class="fa-stack fa-3x" data-count="{{count($user_notifications->unread_notifications)}}">
+                <span class="fa-stack fa-2x" data-count="{{count($user_notifications->unread_notifications)}}">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-bell fa-stack-1x fa-inverse"></i>
                 </span>
@@ -17,6 +17,7 @@
                     @endforeach
                 </ul>
                 </div>
+                <p>{{$user_notifications->name}}</p>
             </div>
         </div>
         
@@ -33,8 +34,9 @@
             @if(session('error'))
                 <h1>{{session('error')}}</h1>
             @endif
+            
+            <span><b>Name : {{$user_notifications->name}}</b></span>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                
                 <div>
                 <table id="users">
                     <tr>
