@@ -43,7 +43,7 @@
                             <!-- <label for="">Notification Switch</label>
                             <input type="text" name="notification_switch" value="{{$user->notification_switch}}" class="form-control"> -->
                         <div class="form-check form-switch">
-                            <input class="form-check-input" name="notification_switch" type="checkbox" value="1" role="switch" id="flexSwitchCheckDefault" />
+                            <input class="form-check-input" name="notification_switch" type="checkbox" value="1" role="switch" id="flexSwitchCheckDefault" {{ $user->notification_switch == 1 ? 'checked' : ''}} />
                             <label class="form-check-label" for="flexSwitchCheckDefault">Recieve Notifications</label>
                         </div>
                         </div>
