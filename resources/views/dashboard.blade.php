@@ -25,7 +25,6 @@
                         <th>Email</th>
                         <th>Phone Number</th>
                         <th>Address</th>
-                        <th>Notification Count</th>
                         <th>Notification Switch</th>
                         <th>Action</th>
                     </tr>
@@ -34,11 +33,7 @@
                         <td><a class="text-success" href="{{ url('view-notification/'.$list->id) }}">{{$list->name}}</a></td>
                         <td>{{$list->email}}</td>
                         <td>{{$list->phone_number}}</td>
-                        <td>{{$list->address}}</td>
-                        <td>
-                            {{count($list->notifications)}}
-                        </td>
-                    
+                        <td>{{$list->address}}</td>                        
                         <td>{{$list->notification_switch == 1 ? 'On' : 'Off'}}</td>
                         <td>
                             <a href="{{ url('edit-user/'.$list->id) }}"><i class="fa fa-edit"></i></a> 

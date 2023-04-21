@@ -17,7 +17,6 @@
                     @endforeach
                 </ul>
                 </div>
-                <p>{{$user_notifications->name}}</p>
             </div>
         </div>
         
@@ -35,7 +34,7 @@
                 <h1>{{session('error')}}</h1>
             @endif
             
-            <span><b>Name : {{$user_notifications->name}}</b></span>
+            <span> All Notifications of<b> {{$user_notifications->name}}</b></span>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div>
                 <table id="users">
