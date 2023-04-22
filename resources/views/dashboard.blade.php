@@ -25,6 +25,7 @@
                         <th>Email</th>
                         <th>Phone Number</th>
                         <th>Address</th>
+                        <th>Unread Notifications</th>
                         <th>Notification Switch</th>
                         <th>Action</th>
                     </tr>
@@ -34,6 +35,7 @@
                         <td>{{$list->email}}</td>
                         <td>{{$list->phone_number}}</td>
                         <td>{{$list->address}}</td>                        
+                        <td>{{count($list->unread_notifications)}}</td>
                         <td>{{$list->notification_switch == 1 ? 'On' : 'Off'}}</td>
                         <td>
                             <a href="{{ url('edit-user/'.$list->id) }}"><i class="fa fa-edit"></i></a> 

@@ -44,7 +44,7 @@
                             <input type="date" name="expiry_date" value="" class="form-control">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="">Destination</label>
+                            <label for="">Destination User</label>
                             <select name="destination" id="destination" class="form-select">
                                 <option value="">Select User</option>
                                 @foreach($user_lists as $list)

@@ -34,8 +34,8 @@
                             <label for="">Email*</label>
                             <input type="text" name="email" value="{{$user->email}}" class="form-control">
                         </div>
-                        <div class="form-group mb-3 col-12" style="display:flex">
-                            <div class="form-group mb-3 col-8">
+                        <div class="form-group mb-1 col-12" style="display:flex">
+                            <div class="form-group mb-1 col-8">
                                 <label for="">Phone Number*</label>
                                 <input type="text"  pattern="[0-9]{10}" name="phone_number" id="phone_number" value="{{$user->phone_number}}" class="form-control">
                                 <p class="text-danger"><small>Length should be of 10 digit</small></p>

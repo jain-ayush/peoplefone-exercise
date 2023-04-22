@@ -11,7 +11,12 @@ class UserController extends Controller
 {
     public function index()
     {
-        $userList = User::with('notifications')->get();
+        $userList = User::with(['notifications'=> function($query){
+            $query->where('expiry_date','>', \Carbon\Carbon::now());
+        },'unread_notifications'=> function($query){
+            $query->where('expiry_date','>', \Carbon\Carbon::now());
+        }])->where('email', '!=', 'admin@yopmail.com')->get();
+        // dd($userList);
         return view('dashboard',['lists' => $userList]);
     }
 
@@ -71,7 +76,6 @@ class UserController extends Controller
         }
         catch(TwilioException $e){
             // dd($e);
-            // echo $e; exit;
             return false;
         }
         
