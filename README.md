@@ -1,5 +1,5 @@
 1) Clone the project using git clone command - git clone https://github.com/jain-ayush/peoplefone-exercise.git
-2) after cloning install composer using composer install command
+2) after cloning install composer using composer install command, also run npm install and npm run dev
 3) run migration command i.e. php artisan migrate to create database tables
 4) now to add fake data run - php artisan db:seed --class UserSeeder
 5) run the project using php artisan serve
